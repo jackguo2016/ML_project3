@@ -1,26 +1,33 @@
-# This is a sample Python script.
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+df=pd.read_csv('train.csv', header=0)
+df1=df.iloc[:,2:]
+kmeans = KMeans(n_clusters=2, random_state=10).fit(df1)
+df1['activity']=kmeans.labels_
+df_count_type=df1.groupby('activity').apply(np.size)
+
+df_count_type
+
+kmeans.cluster_centers_
+
+new_df=df1[:]
+new_df
+new_df.to_csv('train.csv')
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-    pxy1 = normpdf(xTe, 0, 1)
-    pxxy1 = pxy1[:, 0] * pxy1[:, 1]
-    pxy2 = normpdf(xTe, OFFSET, 1)
-    pxxy2 = pxy2[:, 0] * pxy2[:, 1]
+pca = PCA(n_components=2)
+new_pca = pd.DataFrame(pca.fit_transform(new_df))
 
-    pxx = pxxy1 * 0.5 + pxxy2 * 0.5
 
-    py1xx = pxxy1 * 0.5 / pxx
-    py2xx = pxxy2 * 0.5 / pxx
-
-    ybar = py1xx + 2 * py2xx
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+d = new_pca[new_df['activity'] == 0]
+plt.plot(d[0], d[1], 'r.')
+d = new_pca[new_df['activity'] == 1]
+plt.plot(d[0], d[1], 'go')
+d = new_pca[new_df['activity'] == 2]
+plt.plot(d[0], d[1], 'b*')
+plt.gcf().savefig('kmeans.png')
+plt.show()
