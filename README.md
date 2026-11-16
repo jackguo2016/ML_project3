@@ -16,14 +16,16 @@
 确保您的系统中已安装Python 3.x,然后运行以下命令安装所需依赖:
 
 ```bash
-pip install numpy pandas matplotlib scikit-learn
+python -m pip install numpy pandas matplotlib scikit-learn scipy notebook
 ```
 
 ## 使用说明
 
-1. K-means和PCA:
-   ```
-   python KMeans_PCA.py
+1. K-means 和 PCA：脚本会覆盖当前目录下的 `train.csv`。请从仓库根目录把脚本和数据复制到临时目录运行，保留原始数据。
+   ```bash
+   scratch_dir="$(mktemp -d)"
+   cp KMeans_PCA.py train.csv "$scratch_dir/"
+   (cd "$scratch_dir" && python KMeans_PCA.py)
    ```
 
 2. 随机森林分类:
@@ -56,7 +58,7 @@ pip install numpy pandas matplotlib scikit-learn
 
 ## 结果
 
-- 随机森林在MNIST数据集上达到约88%的准确率
+- 课程记录中的随机森林准确率约为 88%。模型训练没有固定随机种子，重复运行可能得到不同结果。
 - K-means聚类成功对人体活动数据进行了分组
 - 通过感知机算法实现,深入理解了机器学习中的基本概念
 
@@ -83,14 +85,16 @@ This project implements and applies various machine learning algorithms, includi
 Ensure you have Python 3.x installed on your system. Then run the following command to install the required dependencies:
 
 ```bash
-pip install numpy pandas matplotlib scikit-learn
+python -m pip install numpy pandas matplotlib scikit-learn scipy notebook
 ```
 
 ## Usage
 
-1. K-means and PCA:
-   ```
-   python KMeans_PCA.py
+1. K-means and PCA: the script overwrites `train.csv` in its working directory. Run it on a temporary copy to preserve the original data. Start in the repository root.
+   ```bash
+   scratch_dir="$(mktemp -d)"
+   cp KMeans_PCA.py train.csv "$scratch_dir/"
+   (cd "$scratch_dir" && python KMeans_PCA.py)
    ```
 
 2. Random Forest Classification:
@@ -123,7 +127,7 @@ pip install numpy pandas matplotlib scikit-learn
 
 ## Results
 
-- Random Forest achieved approximately 88% accuracy on the MNIST dataset
+- The coursework notes record about 88% accuracy for the random forest. The model has no fixed random seed, so reruns may differ.
 - K-means clustering successfully grouped human activity data
 - Gained deep understanding of basic machine learning concepts through Perceptron implementation
 
@@ -133,4 +137,4 @@ Improvements and extensions to the project are welcome. If you have any question
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+The original README referenced an MIT license file. The current repository does not include that file.
