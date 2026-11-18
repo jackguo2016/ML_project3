@@ -138,3 +138,7 @@ Improvements and extensions to the project are welcome. If you have any question
 ## License
 
 The original README referenced an MIT license file. The current repository does not include that file.
+
+## Project history
+
+Former repository name: `ML_project3`. This repository preserves the original coursework and its development history.
